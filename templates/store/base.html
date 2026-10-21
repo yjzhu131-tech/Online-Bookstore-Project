@@ -1,0 +1,24 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Online Bookstore{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'store/style.css' %}">
+</head>
+<body>
+  <header>
+    <a class="site-title" href="{% url 'catalog' %}">Online Bookstore</a>
+    <nav aria-label="Main navigation">
+      <a href="{% url 'catalog' %}">Books</a>
+      <a href="{% url 'cart' %}">Cart ({{ cart_count }})</a>
+    </nav>
+  </header>
+  <main>
+    {% for message in messages %}<p class="notice" role="status">{{ message }}</p>{% endfor %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer>Online Bookstore</footer>
+</body>
+</html>

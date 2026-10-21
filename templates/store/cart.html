@@ -1,0 +1,16 @@
+{% extends 'store/base.html' %}
+{% block content %}
+<h1>Shopping Cart</h1>
+{% if books %}
+<div class="table-container"><table>
+  <thead><tr><th scope="col">Book</th><th scope="col">Author</th><th scope="col">Price</th><th scope="col">Action</th></tr></thead>
+  <tbody>{% for book in books %}<tr>
+    <td><a href="{% url 'detail' book.pk %}">{{ book.title }}</a></td><td>{{ book.author }}</td><td class="price">${{ book.price }}</td>
+    <td><form method="post" action="{% url 'remove_cart' book.pk %}">{% csrf_token %}<button class="secondary">Remove</button></form></td>
+  </tr>{% endfor %}</tbody>
+</table></div>
+<p class="total">Total: ${{ total }}</p>
+<p class="muted">One digital copy per title. No payment is required for this demonstration.</p>
+<div class="actions"><a href="{% url 'catalog' %}">Continue shopping</a><a class="button" href="{% url 'checkout' %}">Checkout</a></div>
+{% else %}<p>Your cart is empty.</p><a href="{% url 'catalog' %}">Browse books</a>{% endif %}
+{% endblock %}

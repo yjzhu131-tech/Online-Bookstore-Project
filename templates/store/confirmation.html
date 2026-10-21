@@ -1,0 +1,17 @@
+{% extends 'store/base.html' %}
+{% block content %}
+<h1>Order Confirmation</h1>
+<p>Thank you, {{ order.customer_name }}. Your order is confirmed.</p>
+<p><strong>Order number:</strong> {{ order.order_number }}</p>
+{% if delivery.status == 'sent' %}
+<p>Your eBook placeholder email has been handed to the email service for {{ order.customer_email }}.</p>
+{% else %}
+<p>Your order is saved. Email delivery is pending and can be retried.</p>
+{% endif %}
+<section class="summary">
+<h2>Order details</h2>
+{% for item in order.items.all %}<div class="summary-line"><span>{{ item.book_title }}</span><span>${{ item.unit_price }}</span></div>{% endfor %}
+<p class="total">Total: ${{ order.total_amount }}</p>
+</section>
+<p><a href="{% url 'catalog' %}">Back to books</a></p>
+{% endblock %}

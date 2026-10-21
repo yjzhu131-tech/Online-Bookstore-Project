@@ -1,0 +1,19 @@
+{% extends 'store/base.html' %}
+{% block content %}
+<h1>Checkout</h1>
+<p>Enter your name and email to receive your eBook placeholder.</p>
+<div class="checkout-layout">
+  <form method="post" class="checkout-form">
+    {% csrf_token %}{{ form.non_field_errors }}
+    {% for field in form %}<div class="field">{{ field.label_tag }}{{ field }}{{ field.errors }}</div>{% endfor %}
+    <p class="muted">This is a demonstration order. No payment is collected.</p>
+    <button type="submit">Place order</button>
+  </form>
+  <section class="summary">
+    <h2>Order summary</h2>
+    {% for book in books %}<div class="summary-line"><span>{{ book.title }}</span><span>${{ book.price }}</span></div>{% endfor %}
+    <p class="total">Total: ${{ total }}</p>
+  </section>
+</div>
+<p><a href="{% url 'cart' %}">Back to cart</a></p>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'store/base.html' %}
+{% block title %}{{ book.title }} - Online Bookstore{% endblock %}
+{% block content %}
+<p><a href="{% url 'catalog' %}">Back to books</a></p>
+<h1>{{ book.title }}</h1>
+<p><strong>Author:</strong> {{ book.author }}</p>
+<p><strong>Category:</strong> {{ book.category }}</p>
+<div class="description">{{ book.description|linebreaks }}</div>
+<p><strong>Price: ${{ book.price }}</strong></p>
+<form method="post" action="{% url 'add_cart' book.pk %}">{% csrf_token %}<button>Add to cart</button></form>
+<p class="muted">You will receive a .txt eBook placeholder by email, not the full book.</p>
+{% endblock %}
