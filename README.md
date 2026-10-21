@@ -133,8 +133,3 @@ Author and category are fields in Book, not separate tables.
 ```bash
 python manage.py test
 ```
-
-## References
-
-- https://github.com/RossJiao/Bookstore-Project
-- https://github.com/kelseyloeun/Ecommerce-bookstore
